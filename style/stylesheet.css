@@ -1,0 +1,148 @@
+h1{
+	position: relative;
+	top: 25px;
+	font-size: 40px;
+	height: 20px;
+	color: white;
+	font-family: custom;
+	margin-bottom: 20px;
+
+}
+
+.element {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+html {
+
+ }
+
+h2{
+	position: relative;
+	top: 70px;
+	right: -200px;
+	font-size: 40px;
+	height: 20px;
+	color: white;
+	font-family: custom;
+	margin-top: 0px;
+}
+
+html, body
+{
+    height: 100%;
+    min-height: 100%;
+}
+
+p{
+	color: white;
+}
+
+footer{
+	position: absolute;
+	bottom: 0px;
+}
+
+@font-face {
+    font-family: custom;
+    src: url(fonts/BebasNeue.otf) format("OpenType");
+}
+
+input:focus {
+    outline-width: 0;
+}
+
+#head{
+    width:100%;
+    height:160px;
+    background:#381D42;
+}
+
+#game{
+	min-height: 200px;
+	max-height: 53%;
+	position: absolute;
+    width:100%;
+    top: 100%;
+    vertical-align: middle;
+    height:53%;
+    background:#FFFFFF;
+}
+
+#meat{
+	min-height: 200px;
+	max-height: 60%;
+	position: absolute;
+    width:100%;
+    top: 153%;
+    vertical-align: middle;
+    height:60%;
+    background:#AA2121;
+}
+
+#github{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 26px;
+	left: -55%;
+}
+
+#steam{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 18px;
+	left: -55%;
+}
+
+#twitter{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 18px;
+	right: -55%;
+}
+
+#youtube{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 18px;
+	right: -55%;
+
+}
+
+#mac{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: -0%;
+	right: -20%;
+}
+
+input{
+	position: absolute;
+}
+
+body { 
+    background-image: url('wallpaper.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover; 
+    font-family: Arial, "Myriad Pro";
+	font-size: 11px;
+}
