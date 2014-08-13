@@ -16,7 +16,7 @@ h1{
 }
 
 html {
-
+	overflow-x:hidden;
  }
 
 h2{
@@ -28,6 +28,16 @@ h2{
 	color: white;
 	font-family: custom;
 	margin-top: 0px;
+}
+
+h3{
+	position: relative;
+	top: 15%;
+	font-size: 350%;
+	height: 20px;
+	color: white;
+	font-family: meat;
+	margin-top: 10px;
 }
 
 html, body
@@ -48,6 +58,10 @@ footer{
 @font-face {
     font-family: custom;
     src: url(fonts/BebasNeue.otf) format("OpenType");
+}
+@font-face {
+    font-family: meat;
+    src: url(fonts/super-mario.ttf) format("TrueType");
 }
 
 input:focus {
@@ -72,14 +86,25 @@ input:focus {
 }
 
 #meat{
-	min-height: 200px;
-	max-height: 60%;
+	min-height: 60%;
+	max-height: 70%;
 	position: absolute;
     width:100%;
     top: 153%;
     vertical-align: middle;
-    height:60%;
+    height:70%;
     background:#AA2121;
+}
+
+#whatsup{
+	min-height: 2%;
+	max-height: 5%;
+	position: absolute;
+    width:100%;
+    bottom: -128%;
+    vertical-align: middle;
+    height:70%;
+    background:#4FC22B;
 }
 
 #github{
