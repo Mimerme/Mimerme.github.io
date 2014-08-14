@@ -32,12 +32,12 @@ h2{
 
 h3{
 	position: relative;
-	top: 15%;
 	font-size: 350%;
-	height: 20px;
 	color: white;
+	font-size: 50px;
 	font-family: meat;
 	margin-top: 10px;
+	padding-left: 20px;
 }
 
 html, body
@@ -76,7 +76,7 @@ input:focus {
 
 #game{
 	min-height: 200px;
-	max-height: 53%;
+	max-height: 525px;
 	position: absolute;
     width:100%;
     top: 100%;
