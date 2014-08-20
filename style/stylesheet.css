@@ -9,6 +9,11 @@ h1{
 
 }
 
+html, body {
+   height: 2000px;
+   margin: 0;
+}
+
 .element {
   position: fixed;
   bottom: 0;
@@ -75,35 +80,24 @@ input:focus {
 }
 
 #game{
-	min-height: 200px;
-	max-height: 525px;
-	position: absolute;
+
     width:100%;
     top: 100%;
     vertical-align: middle;
-    height:53%;
     background:#FFFFFF;
 }
 
 #meat{
-	min-height: 60%;
-	max-height: 70%;
-	position: absolute;
     width:100%;
-    top: 153%;
     vertical-align: middle;
-    height:70%;
+
     background:#AA2121;
 }
 
 #whatsup{
-	min-height: 2%;
-	max-height: 5%;
-	position: absolute;
     width:100%;
-    bottom: -128%;
     vertical-align: middle;
-    height:70%;
+    height:5%;
     background:#4FC22B;
 }
 
