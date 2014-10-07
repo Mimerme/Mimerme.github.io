@@ -6,7 +6,12 @@ $(document).ready(function(){
 	    effect: 'slideFastSynced',
 	    entryTemplate: '<center><font color="blue">{title}</font></center><center><dd>Published by <font color="red">{author}</font> on <font color="green">{date}</font></dd></center><center><button><script>console.log("View Summary for {title}"); console.log("http://smmry.com/" + "{url}")</script>Press F12 and view console to view summarys</button><a href= {url}>View Article</a></center><br>'
 	}).show();
-
+	$("#reddit").rss("http://www.reddit.com/r/tech/.rss", {
+	    limit: 999,
+	    layoutTemplate: '<section>{entries}</section>',
+	    effect: 'slideFastSynced',
+	    entryTemplate: '<center><font color="blue">{title}</font></center><center><dd>Published by <font color="red">{author}</font> on <font color="green">{date}</font></dd></center><center><button><script>console.log("View Summary for {title}"); console.log("http://smmry.com/" + "{url}")</script>Press F12 and view console to view summarys</button><a href= {url}>View Article</a></center><br>'
+	}).show();
 	console.log("No Copyright cause screw copyright laws");
 	console.log("Developed By Andros (Mimerme) Yang");
 	console.log("Hosted on Mimerme.github.io, domain provided by Github Pages");
