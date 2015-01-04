@@ -44,7 +44,12 @@ h3{
 	margin-top: 10px;
 	padding-left: 20px;
 }
-
+h4{
+	font-family: retro;
+	text-align: center;
+	font-size: 50px;
+	padding: 10px;
+}
 html, body
 {
     height: 100%;
@@ -68,10 +73,15 @@ footer{
     font-family: meat;
     src: url(fonts/super-mario.ttf) format("TrueType");
 }
+@font-face {
+    font-family: retro;
+    src: url(fonts/Sabo-Regular.otf) format("OpenType");
+}
 
 input:focus {
     outline-width: 0;
 }
+
 
 #head{
     width:100%;
@@ -80,18 +90,16 @@ input:focus {
 }
 
 #game{
-
     width:100%;
     top: 100%;
     vertical-align: middle;
     background:#FFFFFF;
 }
 
-#meat{
+#rallyPong{
     width:100%;
     vertical-align: middle;
-
-    background:#AA2121;
+    background:#000;
 }
 
 #whatsup{
