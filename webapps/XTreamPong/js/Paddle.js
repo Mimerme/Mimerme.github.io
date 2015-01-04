@@ -140,6 +140,8 @@ this.checkIntersection = function() {
             rallies = 0;
             ballSpeed = 3.5;
             debugSpeed = 400;
+
+            stage.update();
         }
         switch(rallies){
             case 5 : 
