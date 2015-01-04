@@ -16,6 +16,9 @@ function Ball (stage, ball){
     createjs.Ticker.addEventListener("tick", handleTick);
     
  function handleTick(event) {
+        if(playing == false){
+            return;
+        }
          if(getBall.y > 300 - 10 || getBall.y < 0){
                     velY = velY * -1;
              audio.play();

@@ -20,7 +20,7 @@ $(document).ready(function(){
     var paddle1 = new createjs.Shape();
     paddle1.graphics.beginFill("#ffffff").drawRect(0, 0, 25, 100);  
     paddle1.x = 25;
-    paddle1.y = 100;
+    paddle1.y = 200;
     paddle1.width = 25;
     paddle1.height = 100;
     
