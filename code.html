@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+        <link rel="stylesheet" type="text/css" href="http://csharpindepth.com/codestyles.css">
+
+        <div class="code">
+                                <span class="Namespace">using</span>&nbsp;UnityEngine;<br />
+                                <span class="Namespace">using</span>&nbsp;System.Collections;<br />
+                                <br />
+                                <span class="Modifier">public</span>&nbsp;<span class="ReferenceType">class</span>&nbsp;CharacterController2D&nbsp;:&nbsp;MonoBehaviour&nbsp;{<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">float</span>&nbsp;upSpead;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">float</span>&nbsp;jumpSpead;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">bool</span>&nbsp;jumping&nbsp;=&nbsp;<span class="Keyword">false</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">bool</span>&nbsp;grounded&nbsp;=&nbsp;<span class="Keyword">false</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ReferenceType">string</span>&nbsp;sidesHit&nbsp;=&nbsp;<span class="String">"none"</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;Vector2&nbsp;down;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;Vector2&nbsp;sides;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;Vector2&nbsp;sideLeft;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">float</span>&nbsp;skinWidth&nbsp;=&nbsp;0.1f;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">float</span>&nbsp;InitalAcceleration&nbsp;=&nbsp;500;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">float</span>&nbsp;airspeed&nbsp;=&nbsp;500;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="Modifier">public</span>&nbsp;<span class="ValueType">bool</span>&nbsp;maxSpeed&nbsp;=&nbsp;<span class="Keyword">false</span>;<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;Vector2&nbsp;start;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;RaycastHit2D&nbsp;hit;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="ValueType">void</span>&nbsp;Start(){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//start&nbsp;=&nbsp;transform.position;</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//start.y&nbsp;=&nbsp;transform.position.y&nbsp;-&nbsp;transform.localScale.y/2f;</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="ValueType">void</span>&nbsp;Update&nbsp;()&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Basic&nbsp;ground&nbsp;checking&nbsp;code&nbsp;with&nbsp;Physics2d&nbsp;raycasting</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sideLeft&nbsp;=&nbsp;transform.position;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sideLeft.x&nbsp;=&nbsp;transform.position.x&nbsp;-&nbsp;transform.localScale.x&nbsp;/&nbsp;2&nbsp;-&nbsp;0.1f;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sides&nbsp;=&nbsp;transform.position;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sides.x&nbsp;=&nbsp;transform.position.x&nbsp;+&nbsp;transform.localScale.x&nbsp;/&nbsp;2&nbsp;+&nbsp;0.1f;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;transform.position;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start.y&nbsp;=&nbsp;transform.position.y&nbsp;-&nbsp;transform.localScale.y/2f&nbsp;-&nbsp;0.1f;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.DrawRay&nbsp;(start,&nbsp;-Vector2.up);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.DrawRay&nbsp;(<span class="Keyword">new</span>&nbsp;Vector2(start.x&nbsp;-&nbsp;transform.localScale.x/2,&nbsp;start.y),&nbsp;-Vector2.up);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.DrawRay&nbsp;(<span class="Keyword">new</span>&nbsp;Vector2(start.x&nbsp;+&nbsp;transform.localScale.x/2,&nbsp;start.y),&nbsp;-Vector2.up);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.DrawRay&nbsp;(sides,&nbsp;Vector2.right);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.DrawRay&nbsp;(sideLeft,&nbsp;-Vector2.right);<br />
+                                <br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Physics2D.Raycast&nbsp;(start,&nbsp;-Vector2.up,&nbsp;skinWidth).collider&nbsp;!=&nbsp;<span class="Keyword">null</span>&nbsp;||&nbsp;Physics2D.Raycast&nbsp;(<span class="Keyword">new</span>&nbsp;Vector2(start.x&nbsp;+&nbsp;transform.localScale.x/2,&nbsp;start.y),&nbsp;-Vector2.up,&nbsp;skinWidth).collider&nbsp;!=&nbsp;<span class="Keyword">null</span>&nbsp;||&nbsp;Physics2D.Raycast&nbsp;(<span class="Keyword">new</span>&nbsp;Vector2(start.x&nbsp;-&nbsp;transform.localScale.x/2,&nbsp;start.y),&nbsp;-Vector2.up,&nbsp;skinWidth).collider&nbsp;!=&nbsp;<span class="Keyword">null</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grounded&nbsp;=&nbsp;<span class="Keyword">true</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="Statement">else</span>&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grounded&nbsp;=&nbsp;<span class="Keyword">false</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetKeyUp(KeyCode.A)&nbsp;&amp;&amp;&nbsp;grounded&nbsp;==&nbsp;<span class="Keyword">true</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Detect&nbsp;when&nbsp;certain&nbsp;keys&nbsp;are&nbsp;released&nbsp;to&nbsp;reset&nbsp;velocity</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Reset&nbsp;the&nbsp;velocity&nbsp;to&nbsp;a&nbsp;number&nbsp;close&nbsp;to&nbsp;0&nbsp;to&nbsp;make&nbsp;a&nbsp;sudden&nbsp;stop,&nbsp;but&nbsp;ease&nbsp;out&nbsp;to&nbsp;fell&nbsp;smoother</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.velocity&nbsp;=&nbsp;<span class="Keyword">new</span>&nbsp;Vector2(-2,0);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetKeyUp(KeyCode.D)&nbsp;&amp;&amp;&nbsp;grounded&nbsp;==&nbsp;<span class="Keyword">true</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.velocity&nbsp;=&nbsp;<span class="Keyword">new</span>&nbsp;Vector2(2,0);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Jumping&nbsp;Trigger</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetKeyDown&nbsp;(KeyCode.Space))&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>(grounded&nbsp;==&nbsp;<span class="Keyword">true</span>){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumping&nbsp;=&nbsp;<span class="Keyword">true</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Add&nbsp;the&nbsp;Initial&nbsp;Accleration&nbsp;to&nbsp;make&nbsp;the&nbsp;player&nbsp;shoot&nbsp;up,&nbsp;and&nbsp;then&nbsp;slow&nbsp;down,&nbsp;then&nbsp;fall</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(0,InitalAcceleration));<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetKeyUp&nbsp;(KeyCode.Space))&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumping&nbsp;=&nbsp;<span class="Keyword">false</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetKey&nbsp;(KeyCode.Space))&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>(jumping&nbsp;==<span class="Keyword">true</span>){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Detect&nbsp;if&nbsp;speed&nbsp;limit&nbsp;is&nbsp;reached,&nbsp;and&nbsp;then&nbsp;fall&nbsp;back&nbsp;down</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>(rigidbody2D.velocity.y&nbsp;&gt;=10){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumping&nbsp;=&nbsp;<span class="Keyword">false</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(0,jumpSpead&nbsp;*&nbsp;Time.deltaTime));<br />
+                                <br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Detect&nbsp;sides&nbsp;by&nbsp;raycastting.&nbsp;Possibly&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;wall&nbsp;jumping</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Physics2D.Raycast&nbsp;(sides,&nbsp;Vector2.right,&nbsp;skinWidth).collider&nbsp;!=&nbsp;<span class="Keyword">null</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sidesHit&nbsp;=&nbsp;<span class="String">"right"</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="Statement">else</span>&nbsp;<span class="Statement">if</span>&nbsp;(Physics2D.Raycast&nbsp;(sideLeft,&nbsp;-Vector2.right,&nbsp;skinWidth).collider&nbsp;!=&nbsp;<span class="Keyword">null</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sidesHit&nbsp;=&nbsp;<span class="String">"left"</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">else</span>&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sidesHit&nbsp;=&nbsp;<span class="String">"none"</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Move&nbsp;();<br />
+                                <br />
+                                <br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="ValueType">void</span>&nbsp;Move(){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Move&nbsp;in&nbsp;air&nbsp;code</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetAxisRaw&nbsp;(<span class="String">"Horizontal"</span>)&nbsp;&lt;&nbsp;0&nbsp;&amp;&amp;&nbsp;grounded&nbsp;==&nbsp;<span class="Keyword">false</span>&nbsp;&amp;&amp;&nbsp;maxSpeed&nbsp;==&nbsp;<span class="Keyword">true</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(airspeed&nbsp;*&nbsp;Time.deltaTime,0));<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">else</span>&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetAxisRaw&nbsp;(<span class="String">"Horizontal"</span>)&nbsp;&gt;&nbsp;0&nbsp;&amp;&amp;&nbsp;grounded&nbsp;==&nbsp;<span class="Keyword">false</span>&nbsp;&amp;&amp;&nbsp;maxSpeed&nbsp;==&nbsp;<span class="Keyword">true</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(-airspeed&nbsp;*&nbsp;Time.deltaTime,0));<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="InlineComment">//Move&nbsp;Left/Right&nbsp;Code</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(rigidbody2D.velocity.x&nbsp;&gt;=&nbsp;9&nbsp;||&nbsp;rigidbody2D.velocity.x&nbsp;&lt;=&nbsp;-9)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxSpeed&nbsp;=&nbsp;<span class="Keyword">true</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="Statement">else</span>&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>(maxSpeed&nbsp;==&nbsp;<span class="Keyword">true</span>){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxSpeed&nbsp;=&nbsp;<span class="Keyword">false</span>;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetAxisRaw&nbsp;(<span class="String">"Horizontal"</span>)&nbsp;&lt;&nbsp;0&nbsp;&amp;&amp;&nbsp;sidesHit&nbsp;!=&nbsp;<span class="String">"left"</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(maxSpeed&nbsp;==&nbsp;<span class="Keyword">false</span>&nbsp;&amp;&amp;&nbsp;grounded&nbsp;==&nbsp;<span class="Keyword">false</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(-airspeed&nbsp;*&nbsp;Time.deltaTime,0));<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<span class="Statement">else</span>&nbsp;<span class="Statement">if</span>(maxSpeed&nbsp;==&nbsp;<span class="Keyword">false</span>){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(-upSpead&nbsp;*&nbsp;Time.deltaTime,0));<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(Input.GetAxisRaw&nbsp;(<span class="String">"Horizontal"</span>)&nbsp;&gt;&nbsp;0&nbsp;&amp;&amp;&nbsp;sidesHit&nbsp;!=&nbsp;<span class="String">"right"</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="Statement">if</span>&nbsp;(maxSpeed&nbsp;==&nbsp;<span class="Keyword">false</span>&nbsp;&amp;&amp;&nbsp;grounded&nbsp;==&nbsp;<span class="Keyword">false</span>)&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(airspeed&nbsp;*&nbsp;Time.deltaTime,0));<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<span class="Statement">else</span>&nbsp;<span class="Statement">if</span>(maxSpeed&nbsp;==&nbsp;<span class="Keyword">false</span>){<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rigidbody2D.AddForce(<span class="Keyword">new</span>&nbsp;Vector2(upSpead&nbsp;*&nbsp;Time.deltaTime,0));<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                }
+</html>
