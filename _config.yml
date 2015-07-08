@@ -15,7 +15,7 @@ disqus_shortname: 'your-disqus-shortname'
 
 # Details for the RSS feed generator
 url:            'http://mimerme.github.io'
-author:         'YAndros Yang'
+author:         'Andros Yang'
 authorTwitter:  'YourTwitterUsername'
 
 permalink:       /:year/:title/
