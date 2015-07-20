@@ -1,0 +1,48 @@
+---
+title:  "Update to Reverse Engineering the Yik-Yak API"
+date:   2015-07-20 03:16:00
+description: Details about the Yik-Yak API
+---
+
+It has been done! I now have control to manipulate the Yik-Yak API with man thanks
+to the Yik-Yak hacking community! Because of this I will now be able to collect data
+from Yik-Yak as well as submit data as well to their servers. This opens up capabilities
+such as a desktop application from the application and surveys to collect data, my plans
+which I will explain later on.
+
+### Details
+The details about the API will remained closed for the sake of protecting the API from abuse.
+A few members of the community have put a lot of time and effort into hacking Yik-Yak,
+and releasing all that information at once and angering Yik-Yak will flush all the collected
+information down the drain. But there are a few things that will hopefully make this
+post an interesting read for some of you.
+
+### Findings
+
+=> Yik-Yak communicates via its main endpoint @ us.central-yik-yak.com
+
+=> Yik-Yak communicates via its REST API, their requests include
+    => getMessages - gets the posts via the specified parameters
+    => logEvent - assumed to log events to the Yik-Yak server so they can keep track
+    => postMessage - posts a yak
+    => upvote/downvote - votes on a yak
+    => newAccount - called when Yik-Yak is re/installed on a device
+
+=> Yik-Yak uses SALTS (System Time in milliseconds / 1000), as well as a simplified
+version of their requests and runs them through an algorithm that generates a HASH
+used to verify a request's legitimacy
+
+=> They also use 3rd party APIs to manage their notifications, details which will be updated soon
+
+=> All requests are made through HTTPS, designed to protect against MITM attacks,
+but will also cause problems on networks that block SSL encryption
+
+=> The latest update requires phone verification when using Yik-Yak, details are inconclusive
+
+### Conclusions
+I know that the findings above may not seem like much but I am working on a Java API to utilize
+the Yik-Yak API. This will allow for a multitude of things that would never have been able before.
+I have also set up a NodeJS REST server to monitor and throttle all API requests made to the Yik-Yak
+servers, this is to prevent abuse, but still open up the API to the public. Many of the findings above are not detailed, but this is because I am trying to write documentation on the API, and would much rather not
+just type everything here. The API will be published soon and an announcement will be when when
+it is ready. Stay frosty!

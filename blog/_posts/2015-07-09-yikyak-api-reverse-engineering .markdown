@@ -1,6 +1,6 @@
 ---
 title:  "Introduction to Reverse Engineering the Yik-Yak API"
-date:   2015-08-09 01:10:00
+date:   2015-07-09 01:10:00
 description: The well needed step-by-step story on my journey to reverse engineer the Yik-Yak API
 ---
 
@@ -19,7 +19,7 @@ Yik-Yak is aware of this problem and is also taking measures.
 
 ### Why do this?
 Snapchat once had a very open API, that was well documented but was not made
-official, but due to some third party apps causing chaos by stealing saved
+official, but due to some third party apps causing chaos by stealing
 images they quickly closed up the API to essentially make a PR statement
 and put their iron fist down and removed many other third party Snapchat apps.
 Yik-Yak too once had this problem, where everything was as simple as a REST API,
@@ -29,7 +29,7 @@ never have been fond of the practices that arise such as treating followers on
 Instagram as a definition of popularity. Exposing these APIs would allow for
 desktop apps and perhaps further extension of the first party applications.
 
-### How wll you do this?
+### How will you do this?
 I already have a GitHub repository setup for this and am using the wiki as a minor
 blog such as day to day activities, and will use this blog as very important matters.
 I will be writing the console application in Java and develop a Java wrapper for the Yik-Yak
