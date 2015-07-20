@@ -22,17 +22,11 @@ post an interesting read for some of you.
 => Yik-Yak communicates via its main endpoint @ us.central-yik-yak.com
 
 => Yik-Yak communicates via its REST API, their requests include
-
     => getMessages - gets the posts via the specified parameters
-
     => logEvent - assumed to log events to the Yik-Yak server so they can keep track
-
     => postMessage - posts a yak
-
     => upvote/downvote - votes on a yak
-
     => newAccount - called when Yik-Yak is re/installed on a device
-
 
 => Yik-Yak uses SALTS (System Time in milliseconds / 1000), as well as a simplified
 version of their requests and runs them through an algorithm that generates a HASH
