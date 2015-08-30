@@ -2,6 +2,7 @@
 title:  "YakHax Moving Forward"
 date:   2015-08-29 10:37:00
 description: Getting over the hurdles associated with opening the Yik-Yak API to the public
+layout: post
 ---
 
 With the YakHax library nearly completed over these past 3 months and summer nearing its end

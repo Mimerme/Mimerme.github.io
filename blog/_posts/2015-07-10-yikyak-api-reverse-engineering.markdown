@@ -2,6 +2,7 @@
 title:  "Introduction to Reverse Engineering the Yik-Yak API"
 date:   2015-07-10 01:10:00
 description: The well needed step-by-step story on my journey to reverse engineer the Yik-Yak API
+layout: post
 ---
 
 For those who may not be as updated to the latest social media trends, Yik-Yak
