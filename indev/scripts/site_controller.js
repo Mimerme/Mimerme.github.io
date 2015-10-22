@@ -12,7 +12,7 @@ function animateObjectToRight(jobject){
 		'height' : jobject.height()
 
 	};
-	sidebarPullout("Longer texteee666");
+	sidebarPullout(jobject.attr("sidebar"), jobject.attr("caption"));
 	jobject.animate({'top' : -(window.innerHeight / 6) + 'px',
 	 'left' : (window.innerWidth) / 10 + 'px',
 	 'width': jobject.width() * window.innerHeight / 655,
@@ -37,9 +37,10 @@ function returnToPosition(){
 	activeObjectData = {};
 }
 
-function sidebarPullout(source){
+function sidebarPullout(source, sideCaption){
 	$('#sideFrame').animate({'left': '0%'});
-	headerPullout(source);
+	$('#sideFrame').attr("src", source);
+	headerPullout(sideCaption);
 }
 
 //15 - 16 characters to be centered

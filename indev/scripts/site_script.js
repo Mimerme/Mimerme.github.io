@@ -18,7 +18,7 @@ function rotateDependent(orbit, direction, duration, distance){
 		currentRotation += degreesPRotation * direction;
 	else if(current_orbit == 2)
 		currentRotation2 += degreesPRotation2 * direction;
-	
+
 	    $(orbit).animate({deg: currentRotation}, {
         duration: duration * 1000,
         done: function(animation, jumpedToEnd){
@@ -30,23 +30,29 @@ function rotateDependent(orbit, direction, duration, distance){
             });
         }
     });
-    
+
     var objectList = $(orbit).children().children();
     console.log(objectList.length);
     objectList.each(function(){
     	var orbitObject = $(this).children();
-    	
-    	orbitObject.animate({deg: currentRotation * -1}, {
+    	orbitObject.animate({deg: $(this).children().attr("baseRot") - (degreesPRotation * direction)}, {
         duration: duration * 1000,
         done: function(animation, jumpedToEnd){
         	rotating = false;
         },
         step: function(now){
+					if(now == 0){
+						console.log(now);
+					return;
+				}
             orbitObject.css({
+							//MOD
                  transform: "translateX(" + distance + "px) rotate(" + now + "deg)"
         	    });
         	}
 	    });
+			$(this).children().attr("baseRot", parseInt($(this).children().attr("baseRot")) - (degreesPRotation * direction))
+
 	});
 }
 
@@ -56,21 +62,22 @@ $(document).ready(function(){
 	var rotatingChildren = $('#orbitCenter').children('.dead_center').children('.dead_center');
 	degreesPRotation = 360 / rotatingChildren.length;
 	var rotatingParents = $('#orbitCenter').children('.dead_center')
-	
+
 	//Seperate the rotatable objects directly after load
 	var iteration= 0;
 	rotatingChildren.each(function(){
 		$(this).css('transform', 'rotate(' + iteration * degreesPRotation * -1 + 'deg)');
 		$(this).children().first().attr("id","object" + iteration);
+		$(this).children().first().attr('baseRot', iteration * degreesPRotation);
 		iteration ++;
 	});
-	
+
 	objectCount = iteration;
-	
+
 	var rotatingChildren2 = $('#orbitSecondary').children('.dead_center').children('.dead_center');
 	degreesPRotation2 = 360 / rotatingChildren2.length;
 	var rotatingParents2 = $('#orbitSecondary').children('.dead_center')
-	
+
 	//Seperate the rotatable objects directly after load
 	var iteration2 = 0;
 	rotatingChildren2.each(function(){
@@ -80,22 +87,28 @@ $(document).ready(function(){
 
 	$('#orbitCenter').css('visibility', 'hidden');
 	$('#orbitSecondary').css('visibility', 'hidden');
-	
+
 	$('#noOrbit').toggleClass('jelly_scale_play');
 	$('#orbitCenter').css('transform', 'scale(2)');
 	$('#orbitSecondary').css('transform', 'scale(2)');
-	
+
 	window.setTimeout(function(){
+		rotateDependent('#orbitCenter', -1, 0.15,45);
+
+		rotateDependent('#orbitCenter', 1, 0.15,45);
+		rotateDependent('#orbitCenter', 1, 0.15,45);
+
+
 		expandOrbit(1);
 	}, 250);
-	
+
 	//Legacy code
-	$('#noOrbit').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', 
+	$('#noOrbit').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
 		function(e){
 		$('#orbitCenter').css('visibility', 'visible');
 		$('#orbitSecondary').css('visibility', 'visible');
 	});
-	
+
 });
 
 function expandOrbit(orbitLevel){
@@ -120,13 +133,12 @@ function animateExpandObject(jObject, translateLevel, duration){
         step: function(now,fn){
         	fn.start = -25;
         	fn.end = translateLevel;
-			
+
 			//hacky workaround for dem glitchy animations
 			if(now == 0)
 				return;
-			
             jObject.css({
-                 transform: "translateX(" + now + "px)"
+                 transform: "translateX(" + now + "px) rotate(" + jObject.attr("baseRot") + "deg)"
             });
         }
     });

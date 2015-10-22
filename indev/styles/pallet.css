@@ -23,7 +23,7 @@
 .font-primary_color{
 	color: #ffffff;
 	background-color: #ffffff;
-	
+
 }
 
 .font-secondary_color{
@@ -38,7 +38,7 @@
 }
 
 .secondary-border_color{
-	border-width:0.05em;
+	border-width:0.1em;
 	border-style:solid;
 	border-color:#eecd62;
 }

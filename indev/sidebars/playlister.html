@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <style>
+
+  html,p,a,body{
+    margin:0;
+    padding:0;
+
+  }
+  html{
+    overflow: hidden;
+  }
+  body{
+    height:100%;
+    width:100%;
+    background-size: cover;
+    background-image: url(http://45.79.147.243:3000/images/bg.jpg);
+  }
+  /*fonts*/
+  @font-face{
+    font-family: main;
+    src: url(../sidebars/fonts/main.otf);
+  }
+  /*CLASSES*/
+  .title_sides{
+    height:10px;
+    width:25%;
+    background-color:#004573;
+  }
+  .youtube_picture{
+    height:180px;
+    width:320px;
+  }
+  .youtube_container{
+    margin-top:10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height:180px;
+    background-color:#DDD1E1;
+    width:100%;
+    font-family: main;
+    font-size:2em;
+
+  }
+
+  /*IDS*/
+  #returned_data{
+      display:flex;
+      flex-direction: column;
+      overflow-y: auto;
+  }
+  ::-webkit-scrollbar {
+      width: 14px;
+      height: 18px;
+
+  }
+  ::-webkit-scrollbar-thumb {
+      height: 6px;
+      border: 4px solid rgba(0, 0, 0, 0);
+      background-clip: padding-box;
+      -webkit-border-radius: 7px;
+      background-color: rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+  }
+  ::-webkit-scrollbar-button {
+      width: 0;
+      height: 0;
+      display: none;
+  }
+  ::-webkit-scrollbar-corner {
+      background-color: transparent;
+  }
+  #Main_Searchbar{
+      width:60%;
+        text-align: center;
+      font-family:main;
+      background-color:#DDD1E1;
+      outline: solid #004573;
+      margin-top: 10px;
+      font-size:2em;
+  }
+
+  /*#993399*/
+  #loading{
+    position:absolute;
+    height:175px;
+    width:175px;
+  }
+  #main_title{
+    font-family:main;
+    color: #DDD1E1;
+    font-size:4em;
+    text-shadow: 4px 4px #004573;
+    padding-left: 10px;
+    padding-right: 10px;
+
+  }
+  #mid_title{
+    font-family:main;
+    color: #DDD1E1;
+    font-size:2em;
+    text-shadow: 2px 2px #004573;
+    padding-left: 10px;
+    padding-right: 10px;
+
+  }
+  #main_container_container{
+    display :flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    position:relative;
+
+  }
+  #main_container{
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  p{
+    background-color: #DDD1E1;
+    outline: solid #004573;
+  }
+  </style>
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body style="background-color: #58E2C9;">
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+        <div id="main_container_container">
+                <div class="title_sides" style=""></div>
+                <span id="main_title">
+                  playlister
+                </span>
+                <div class="title_sides"></div>
+              </div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+          <div id="main_container_container">
+                  <div class="title_sides" style=""></div>
+                  <span id="mid_title">
+                    about
+                  </span>
+                  <div class="title_sides"></div>
+                </div>
+				</div>
+			</div>
+			<p style="background-color: #DDD1E1;">
+        <big>
+          Playlister is a webapp implementing the Twilio API, MongoDB, Youtube Search API, and Google Custom Search API. It was developed at HackRU Fall 2015. Playlister acts as an on the go service by allowing users to add their favourite music through the SMS using the name of the song itself or searching for songs matching the given lyrics.
+      </big>
+      </p>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div id="main_container_container">
+                  <div class="title_sides" style=""></div>
+                  <span id="mid_title">
+                    technologies used
+                  </span>
+                  <div class="title_sides"></div>
+                </div>
+				</div>
+        </div>
+      <p style="background-color: #DDD1E1;">
+        <big>
+          <b>Youtube Data API v3</b> - used to parse for Youtube searches when adding songs
+        </br>
+          <b>Google Custom Search API</b> - used to search for matching lyrics
+        </br>
+          <b>NodeJS and Express</b> - backend management
+        </br>
+          <b>MongoDB</b> - storing users data
+        </br>
+          <b>Twilio</b> - Sending and receiving text messages
+        </br>
+          <b>Linode</b> - used to host the NodeJS server
+      </big>
+      </p>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div id="main_container_container">
+                  <div class="title_sides" style=""></div>
+                  <span id="mid_title">
+                    usage
+                  </span>
+                  <div class="title_sides"></div>
+                </div>
+        </div>
+      </div>
+      <p>
+        <big>
+          <b>add</b> [SONG_NAME]: adds the song to your playlist</br>
+          <b>lyric</b> [SONG_LYRICS]: returns song name and adds the song to your playlist</br>
+        </br>
+        When you want to view your playlist navigate to <a href="http://tinyurl.com/pllister">http://tinyurl.com/pllister</a> and enter your phone number
+        </big>
+      </p>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

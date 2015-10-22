@@ -4,6 +4,11 @@
 	font-family: 'Molot', sans-serif;
 }
 
+.mainfont{
+	font-size:small;
+	font-family: 'Molot', sans-serif;
+}
+
 #sideFrame{
 	z-index: 8820;
 	position:absolute;

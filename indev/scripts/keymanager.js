@@ -7,12 +7,12 @@ $('html').keydown(function(eventData){
 	console.log(eventData.which);
 	switch(eventData.which){
 	//Backspace
-		case 8:
+		case 40:
 		if(!isActive)
 			return;
 		returnToPosition();
 		break;
-	
+
 	//Right arrow
 		case 39:
 		if(isActive)
@@ -32,12 +32,12 @@ $('html').keydown(function(eventData){
 			rotateDependent('#orbitSecondary', -1, 0.15,90);
 		break;
 	//Enter
-		case 13:
+		case 38:
 		if(isActive)
 			return;
 		animateObjectToRight($('#object' + calculateSelected()));
 		break;
-		
+
 	//Debug mode
 		case 68:
 		console.log('Toggling debug mode')
@@ -55,7 +55,7 @@ $('html').keydown(function(eventData){
 				'dummy': activeObjectData.top + ' : ' + activeObjectData.left
 			});
 				//Current a debug loop to display the variables on screen
-			interval = window.setInterval(function(){			
+			interval = window.setInterval(function(){
 				updateValues({
 					'current_orbit': current_orbit,
 					'DEBUG_UPDATE_SPEED' : DEBUG_UPDATE_SPEED,
@@ -67,7 +67,7 @@ $('html').keydown(function(eventData){
 					'currentobjectselected': calculateSelected(),
 					'dummy': activeObjectData.top + ' : ' + activeObjectData.left
 				});
-			}, DEBUG_UPDATE_SPEED);	
+			}, DEBUG_UPDATE_SPEED);
 		}
 		else{
 			$('debug').empty();
@@ -91,5 +91,5 @@ function updateValues(hashTable){
 	{
 	    $('#' + variable).text(variable + ':' + hashTable[variable]);
 	}
-   
+
 }
