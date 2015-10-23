@@ -100,10 +100,13 @@ $(document).ready(function(){
 
 		rotateDependent('#orbitCenter', 1, 0.15,45);
 		rotateDependent('#orbitCenter', 1, 0.15,45);
-
-
+		window.setTimeout(function(){
+			rotating = true;
+			priiLoad();
+		}, 1000);
 		expandOrbit(1);
 	}, 250);
+
 
 	//Legacy code
 	$('#noOrbit').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
@@ -112,20 +115,26 @@ $(document).ready(function(){
 		$('#orbitSecondary').css('visibility', 'visible');
 	});
 
+});
+
+function priiLoad(){
 	console.log("Preloading iframes");
 	for (var i = 0; i < projectList.length; i++) {
 		console.log(projectList[i]);
+		if(i < projectList - 1)
 		$('body').append("<iframe class='cl' id='" + projectList[i] + "' src='sidebars/" + projectList[i] + ".html' frameborder='0'></iframe>");
+		else{
+			$('body').append("<iframe class='cl' id='" + projectList[i] + "' src='sidebars/" + projectList[i] + ".html' frameborder='0' onload='rotating=false;'></iframe>");
+		}
 }
-
-});
+}
 
 function expandOrbit(orbitLevel){
 	if(orbitLevel == 1){
 		$('#orbitCenter').children().children().each(function(){
-			animateExpandObject($(this).children(), 45, 0.8)
+			animateExpandObject($(this).children(), 45, 1)
 		});
-		animateExpandHighlight($('.highlight-lv1'), 270, 0.4);
+		animateExpandHighlight($('.highlight-lv1'), 270, 1);
 	}
 	else if(orbitLevel == 2){
 		$('#orbitSecondary').children().children().each(function(){
