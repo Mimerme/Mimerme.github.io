@@ -14,6 +14,10 @@
     font-size: 150% !important;
   }
   </style>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +28,48 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <style>
+    body{
+  background-color: #a8a8a8;
+}
+
+.left-icon-slides{
+  padding-left: 5%;
+  padding-top: 5%;
+}
+
+.carousel-caption{
+  position: relative;
+  bottom: 200px;
+  padding-top: 0px;
+}
+
+.large-p{
+  font-size: 170%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.large-h{
+  font-size: 190%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.white{
+  color: white;
+  text-shadow: 1px 2px #000;
+}
+
+.center{
+  vertical-align: middle;
+}
+
+.button-padding{
+  padding-top: 30px;
+}
+
+    </style>
 
   </head>
   <body style="background-color: #808080;">
@@ -54,14 +100,65 @@
       </big>
       </p>
       <center>
-      <div class="row">
-        <div class="col-md-12">
-            <a href="http://stubz.tk" class="text-center" style="font-size:300%" target="_blank">Live Site</a>
-        </div>
-      </div>
     </center>
 
-      <iframe src="http://stubz.tk" width="100%" height="550px"></iframe>
+    <div id="myCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                  <div class="item active">
+
+                    <div class="left-icon-slides">
+                    <img src="http://stubz.tk/Images/trash-can.png" alt="Trash Can" width="300px" height="350px">
+                    </div>
+
+                    <div class="carousel-caption">
+                      <h4 class="large-h">Stubz is anonymous</h4>
+                      <p class="large-p">Each stub is completely anonymous, no data <br>
+                        about our users are  collected, sold, or given away. <br>
+                        Everything from the nicknames to the chat logs are all <br>
+                        purged when the room reaches its expiration<br>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="item">
+
+                    <div class="left-icon-slides">
+                    <img src="http://stubz.tk/Images/octobiwan.png" alt="Fast" width="400px" height="350px">
+                    </div>
+
+                    <div class="carousel-caption">
+                      <h4 class="large-h">Stubz is free &amp; open source</h4>
+                      <p class="large-p">Stubz is a free service for everyone <br>
+                        and is open source on Github as well.  <br>
+                        Check out the repository below<br>
+                      </p>
+                      <button type="button" class="btn btn-default" onclick="window.open('https://github.com/Mimerme/NewChat')">New Chat Repository </button>
+                    </div>
+
+                  </div>
+
+                  <div class="item">
+
+                    <div class="left-icon-slides">
+                    <img src="http://stubz.tk/Images/button-click.png" alt="Fast" width="400px" height="350px">
+                    </div>
+
+                    <div class="carousel-caption">
+                      <h4 class="large-h">Stubz is convinent</h4>
+                      <p class="large-p">Creating your own stub chatroom is just a few clicks away. <br>
+                        And joining a chat room just requires just a nickname and  <br>
+                        the room name, no more accounts and user passwords.<br>
+                      </p>
+                      <button type="button" class="btn btn-default" onclick="window.open('/new', '_self')">Create a room</button>
+                      <button type="button" class="btn btn-default" onclick="window.open('/chat', '_self')">Join a room</button>
+                    </div>
+
+                  </div>
+
+                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev"></a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next"></a>
+              </div>
 		</div>
 	</div>
 </div>

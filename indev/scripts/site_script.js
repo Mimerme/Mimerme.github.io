@@ -9,6 +9,9 @@ var objectCount = 0;
 //Make rotation calculations
 // - 1 left
 // 1 - right
+
+var projectList = ["yikyak","stayingstill","playlister","stubz","exp"];
+
 function rotateDependent(orbit, direction, duration, distance){
 	if(rotating)
 		return;
@@ -108,6 +111,12 @@ $(document).ready(function(){
 		$('#orbitCenter').css('visibility', 'visible');
 		$('#orbitSecondary').css('visibility', 'visible');
 	});
+
+	console.log("Preloading iframes");
+	for (var i = 0; i < projectList.length; i++) {
+		console.log(projectList[i]);
+		$('body').append("<iframe class='cl' id='" + projectList[i] + "' src='sidebars/" + projectList[i] + ".html' frameborder='0'></iframe>");
+}
 
 });
 

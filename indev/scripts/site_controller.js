@@ -38,8 +38,8 @@ function returnToPosition(){
 }
 
 function sidebarPullout(source, sideCaption){
-	$('#sideFrame').animate({'left': '0%'});
-	$('#sideFrame').attr("src", source);
+	console.log(source.replace("sidebars/", "").replace(".html", ""));
+	$('#' + source.replace("sidebars/", "").replace(".html", "")).animate({'left': '0%'}).addClass("active");
 	headerPullout(sideCaption);
 }
 
@@ -57,6 +57,6 @@ function headerFallback(){
 }
 
 function sidebarFallback(){
-	$('#sideFrame').animate({'left': '-65%'});
+	$('.active').animate({'left': '-65%'});
 	headerFallback();
 }
