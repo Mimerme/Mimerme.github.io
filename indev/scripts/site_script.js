@@ -101,7 +101,6 @@ $(document).ready(function(){
 		rotateDependent('#orbitCenter', 1, 0.15,45);
 		rotateDependent('#orbitCenter', 1, 0.15,45);
 		window.setTimeout(function(){
-			rotating = true;
 			priiLoad();
 		}, 1000);
 		expandOrbit(1);

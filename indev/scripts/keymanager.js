@@ -1,26 +1,11 @@
 ﻿var current_orbit = 1;
 var debug = false;
 var DEBUG_UPDATE_SPEED = 250;
-var firstLoad = false;
 var interval;
+
 $('html').keydown(function(eventData){
-	if(firstLoad == false){
-	iframe = document.getElementById(projectList[projectList.length - 1]);
-
- var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-console.log(iframedoc);
- // Check if loading is complete
- if (  iframeDoc.readyState  == 'complete' ) {
-
-		 //iframe.contentWindow.alert("Hello");
-
-				 alert("I am loaded");
-
-				 firstLoad = true;
-		 return;
- }
-}
-
+	if(rotating == true)
+	return;
 	console.log(eventData.which);
 	switch(eventData.which){
 	//Backspace
