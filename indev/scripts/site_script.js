@@ -3,7 +3,7 @@ var currentRotation2 = 0;
 //Default
 var degreesPRotation = 90;
 var degreesPRotation2 = 90;
-var rotating = false;
+var rotating = true;
 var objectCount = 0;
 
 //Make rotation calculations
@@ -59,72 +59,115 @@ function rotateDependent(orbit, direction, duration, distance){
 	});
 }
 
+var touchEnabled = false;
 
 $(document).ready(function(){
-	console.log("Document is ready for input");
-	var rotatingChildren = $('#orbitCenter').children('.dead_center').children('.dead_center');
-	degreesPRotation = 360 / rotatingChildren.length;
-	var rotatingParents = $('#orbitCenter').children('.dead_center')
+	$("#touchon").click(function(){
+		touchEnabled = !touchEnabled;
+		console.log("Touch controls " + touchEnabled);
+		if(touchEnabled){
+			$("#touchControls").css("opacity", 0.5);
+			$("#tLeft").click(function(){
+				if(isActive && touchEnabled)
+					return;
+				if(current_orbit == 1)
+					rotateDependent('#orbitCenter', -1, 0.2,45);
+				else if(current_orbit == 2)
+					rotateDependent('#orbitSecondary', -1, 0.2,90);
+			});
+			$("#tRight").click(function(){
+				if(isActive && touchEnabled)
+					return;
+					if(current_orbit == 1)
+						rotateDependent('#orbitCenter', 1, 0.2,45);
+					else if(current_orbit == 2)
+						rotateDependent('#orbitSecondary', 1, 0.2,90);
+			});
+			$(".go").click(function(){
+				if(!touchEnabled)
+				return;
+				if(isActive)
+				returnToPosition();
+				else
+					animateObjectToRight($('#object' + calculateSelected()));
+			});
+		}
+		else if(!touchEnabled){
+			$("#touchControls").css("opacity", 0);
+			$('#tLeft').off('click');
+			$('#tRight').off('click');
+			$('.go').off('click');
 
-	//Seperate the rotatable objects directly after load
-	var iteration= 0;
-	rotatingChildren.each(function(){
-		$(this).css('transform', 'rotate(' + iteration * degreesPRotation * -1 + 'deg)');
-		$(this).children().first().attr("id","object" + iteration);
-		$(this).children().first().attr('baseRot', iteration * degreesPRotation);
-		iteration ++;
+		}
 	});
-
-	objectCount = iteration;
-
-	var rotatingChildren2 = $('#orbitSecondary').children('.dead_center').children('.dead_center');
-	degreesPRotation2 = 360 / rotatingChildren2.length;
-	var rotatingParents2 = $('#orbitSecondary').children('.dead_center')
-
-	//Seperate the rotatable objects directly after load
-	var iteration2 = 0;
-	rotatingChildren2.each(function(){
-		$(this).css('transform', 'rotate(' + iteration2 * degreesPRotation2 + 'deg)');
-		iteration2 ++;
-	});
-
-	$('#orbitCenter').css('visibility', 'hidden');
-	$('#orbitSecondary').css('visibility', 'hidden');
-
-	$('#noOrbit').toggleClass('jelly_scale_play');
-	$('#orbitCenter').css('transform', 'scale(2)');
-	$('#orbitSecondary').css('transform', 'scale(2)');
-
-	window.setTimeout(function(){
-		rotateDependent('#orbitCenter', -1, 0.15,45);
-
-		rotateDependent('#orbitCenter', 1, 0.15,45);
-		rotateDependent('#orbitCenter', 1, 0.15,45);
-		window.setTimeout(function(){
-			priiLoad();
-		}, 1000);
-		expandOrbit(1);
-	}, 250);
-
-
-	//Legacy code
-	$('#noOrbit').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-		function(e){
-		$('#orbitCenter').css('visibility', 'visible');
-		$('#orbitSecondary').css('visibility', 'visible');
-	});
-
+	priiLoad();
 });
+
+function active(){
+
+		console.log("Document is ready for input");
+		var rotatingChildren = $('#orbitCenter').children('.dead_center').children('.dead_center');
+		degreesPRotation = 360 / rotatingChildren.length;
+		var rotatingParents = $('#orbitCenter').children('.dead_center')
+
+		//Seperate the rotatable objects directly after load
+		var iteration= 0;
+		rotatingChildren.each(function(){
+			$(this).css('transform', 'rotate(' + iteration * degreesPRotation * -1 + 'deg)');
+			$(this).children().first().attr("id","object" + iteration);
+			$(this).children().first().attr('baseRot', iteration * degreesPRotation);
+			iteration ++;
+		});
+
+		objectCount = iteration;
+
+		var rotatingChildren2 = $('#orbitSecondary').children('.dead_center').children('.dead_center');
+		degreesPRotation2 = 360 / rotatingChildren2.length;
+		var rotatingParents2 = $('#orbitSecondary').children('.dead_center')
+
+		//Seperate the rotatable objects directly after load
+		var iteration2 = 0;
+		rotatingChildren2.each(function(){
+			$(this).css('transform', 'rotate(' + iteration2 * degreesPRotation2 + 'deg)');
+			iteration2 ++;
+		});
+
+		$('#orbitCenter').css('visibility', 'hidden');
+		$('#orbitSecondary').css('visibility', 'hidden');
+
+		$('#noOrbit').toggleClass('jelly_scale_play');
+		$('#orbitCenter').css('transform', 'scale(2)');
+		$('#orbitSecondary').css('transform', 'scale(2)');
+
+			rotateDependent('#orbitCenter', -1, 0.15,45);
+
+			rotateDependent('#orbitCenter', 1, 0.15,45);
+			rotateDependent('#orbitCenter', 1, 0.15,45);
+
+			expandOrbit(1);
+
+
+
+		//Legacy code
+		$('#noOrbit').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+			function(e){
+			$('#orbitCenter').css('visibility', 'visible');
+			$('#orbitSecondary').css('visibility', 'visible');
+		});
+		document.title = "Andros (Mimerme) Yang";
+}
 
 function priiLoad(){
 	console.log("Preloading iframes");
 	for (var i = 0; i < projectList.length; i++) {
 		console.log(projectList[i]);
-		if(i < projectList - 1)
-		$('body').append("<iframe class='cl' id='" + projectList[i] + "' src='sidebars/" + projectList[i] + ".html' frameborder='0'></iframe>");
-		else{
-			$('body').append("<iframe class='cl' id='" + projectList[i] + "' src='sidebars/" + projectList[i] + ".html' frameborder='0' onload='rotating=false;'></iframe>");
+		console.log(i);
+		if(i == projectList.length - 1){
+			$('body').append("<iframe class='cl' id='" + projectList[i] + "' src='sidebars/" + projectList[i] + ".html' frameborder='0' onload='finishLoad()'></iframe>");
 		}
+		else{$('body').append("<iframe class='cl' id='" + projectList[i] + "' src='sidebars/" + projectList[i] + ".html' frameborder='0'></iframe>");
+	}
+
 }
 }
 
@@ -141,7 +184,7 @@ function expandOrbit(orbitLevel){
 		});
 		animateExpandHighlight($('.highlight-lv2'), 540, 0.4);
 	}
-
+	rotating = false;
 }
 
 function animateExpandObject(jObject, translateLevel, duration){

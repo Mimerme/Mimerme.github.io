@@ -4,6 +4,11 @@
 	font-family: 'Molot', sans-serif;
 }
 
+#touchControls{
+	position:relative;
+	opacity: 0;
+}
+
 .mainfont{
 	font-size:small;
 	font-family: 'Molot', sans-serif;

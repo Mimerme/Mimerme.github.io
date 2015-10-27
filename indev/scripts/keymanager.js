@@ -20,18 +20,18 @@ $('html').keydown(function(eventData){
 		if(isActive)
 			return;
 		if(current_orbit == 1)
-			rotateDependent('#orbitCenter', 1, 0.15,45);
+			rotateDependent('#orbitCenter', 1, 0.2,45);
 		else if(current_orbit == 2)
-			rotateDependent('#orbitSecondary', 1, 0.15,90);
+			rotateDependent('#orbitSecondary', 1, 0.2,90);
 		break;
 	//Left arrow
 		case 37:
 		if(isActive)
 			return;
 		if(current_orbit == 1)
-			rotateDependent('#orbitCenter', -1, 0.15,45);
+			rotateDependent('#orbitCenter', -1, 0.2,45);
 		else if(current_orbit == 2)
-			rotateDependent('#orbitSecondary', -1, 0.15,90);
+			rotateDependent('#orbitSecondary', -1, 0.2,90);
 		break;
 	//Enter
 		case 38:
