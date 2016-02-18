@@ -1,0 +1,175 @@
+h1{
+	position: relative;
+	top: 25px;
+	font-size: 40px;
+	height: 20px;
+	color: white;
+	font-family: custom;
+	margin-bottom: 20px;
+
+}
+
+html, body {
+   height: 2000px;
+   margin: 0;
+}
+
+.element {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+html {
+	overflow-x:hidden;
+ }
+
+h2{
+	position: relative;
+	top: 70px;
+	right: -200px;
+	font-size: 40px;
+	height: 20px;
+	color: white;
+	font-family: custom;
+	margin-top: 0px;
+}
+
+h3{
+	position: relative;
+	font-size: 350%;
+	color: white;
+	font-size: 50px;
+	font-family: meat;
+	margin-top: 10px;
+	padding-left: 20px;
+}
+h4{
+	font-family: retro;
+	text-align: center;
+	font-size: 50px;
+	padding: 10px;
+}
+html, body
+{
+    height: 100%;
+    min-height: 100%;
+}
+
+p{
+	color: white;
+}
+
+footer{
+	position: absolute;
+	bottom: 0px;
+}
+
+@font-face {
+    font-family: custom;
+    src: url(fonts/BebasNeue.otf) format("OpenType");
+}
+@font-face {
+    font-family: meat;
+    src: url(fonts/super-mario.ttf) format("TrueType");
+}
+@font-face {
+    font-family: retro;
+    src: url(fonts/Sabo-Regular.otf) format("OpenType");
+}
+
+input:focus {
+    outline-width: 0;
+}
+
+
+#head{
+    width:100%;
+    height:160px;
+    background:#381D42;
+}
+
+#game{
+    width:100%;
+    top: 100%;
+    vertical-align: middle;
+    background:#FFFFFF;
+}
+
+#rallyPong{
+    width:100%;
+    vertical-align: middle;
+    background:#000;
+}
+
+#whatsup{
+    width:100%;
+    vertical-align: middle;
+    height:5%;
+    background:#4FC22B;
+}
+
+#github{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 26px;
+	left: -55%;
+}
+
+#steam{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 18px;
+	left: -55%;
+}
+
+#twitter{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 18px;
+	right: -55%;
+}
+
+#youtube{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: 18px;
+	right: -55%;
+
+}
+
+#mac{
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	top: -0%;
+	right: -20%;
+}
+
+input{
+	position: absolute;
+}
+
+body { 
+    background-image: url('wallpaper.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover; 
+    font-family: Arial, "Myriad Pro";
+	font-size: 11px;
+}
