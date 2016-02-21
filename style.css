@@ -1,0 +1,84 @@
+.split{
+    border-bottom: 5px solid #fff;     
+    width: 100%;
+}
+
+h1{
+   margin-bottom: 10px;
+   border-bottom: 5px solid #57c4d0;
+   font-size: 100px;
+}
+
+h2{
+   border-bottom: 5px solid #57c4d0;
+   font-size: 100px;
+   margin-top: 0px;
+}
+
+#about{
+   font-size: 22px;
+}
+
+
+
+.project-item{
+	height: 35%;
+	width: 35%;
+}
+
+body{
+   background-image: url(http://i.imgur.com/NNoFNWf.png);
+   background-size: cover; 
+   font-family: 'Josefin Slab', serif;
+   background-attachment:fixed;
+   color: white; 
+}
+
+#steam{
+   background-image: url('http://www.iconarchive.com/download/i75918/martz90/circle/steam.ico'); 
+   -moz-border-radius: 300px;
+   -webkit-border-radius: 300px;
+   border-radius: 300px;
+   background-size: contain;
+}
+
+#github{
+   background-image: url('https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif'); 
+   -moz-border-radius: 300px;
+   -webkit-border-radius: 300px;
+   border-radius: 300px;
+   background-size: contain;
+}
+
+#twitter{
+   background-image: url('https://pbs.twimg.com/profile_images/378800000620494787/f542336188a7c3107ebf2df154de5796_400x400.png'); 
+   -moz-border-radius: 300px;
+   -webkit-border-radius: 300px;
+   border-radius: 300px;
+   background-size: contain;
+}
+
+.footer{
+    position: relative;
+    margin-top: 0px;
+}
+
+h3{
+   margin: 0px;
+   float:left;
+   position: absolute;
+   bottom: 0px;
+   left: 0px;
+   background-color: gray;
+   text-color: white;
+}
+
+#blog{
+   background-image: url('http://icons.iconarchive.com/icons/marcus-roberto/google-play/256/Blogger-icon.png'); 
+   -moz-border-radius: 300px;
+   -webkit-border-radius: 300px;
+   border-radius: 300px;
+   background-size: contain;
+}
+
+

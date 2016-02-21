@@ -1,0 +1,16 @@
+
+#yikyak:hover{
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+
+#yikyak{
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+}
